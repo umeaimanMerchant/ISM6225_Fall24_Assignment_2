@@ -9,32 +9,32 @@ namespace Assignment_2
         {
             // Question 1: Find Missing Numbers in Array
             Console.WriteLine("Question 1:");
-            int[] nums1 = { 4, 3, 2, 7, 8, 2, 3, 1 };
+            int[] nums1 = {3, 1, 2, 4 ,5, 9};
             IList<int> missingNumbers = FindMissingNumbers(nums1);
             Console.WriteLine(string.Join(",", missingNumbers));
 
             // Question 2: Sort Array by Parity
             Console.WriteLine("Question 2:");
-            int[] nums2 = { 3, 1, 2, 4 };
+            int[] nums2 = { 3, 1, 2, 4 ,5, 9};
             int[] sortedArray = SortArrayByParity(nums2);
             Console.WriteLine(string.Join(",", sortedArray));
 
             // Question 3: Two Sum
             Console.WriteLine("Question 3:");
             int[] nums3 = { 2, 7, 11, 15 };
-            int target = 9;
+            int target = 18;
             int[] indices = TwoSum(nums3, target);
             Console.WriteLine(string.Join(",", indices));
 
             // Question 4: Find Maximum Product of Three Numbers
             Console.WriteLine("Question 4:");
-            int[] nums4 = { 1, 2, 3, 4 };
+            int[] nums4 = { 1, 2, 3, 1, 2, 4 ,5, 9, 10};
             int maxProduct = MaximumProduct(nums4);
             Console.WriteLine(maxProduct);
 
             // Question 5: Decimal to Binary Conversion
             Console.WriteLine("Question 5:");
-            int decimalNumber = 42;
+            int decimalNumber = 6;
             string binary = DecimalToBinary(decimalNumber);
             Console.WriteLine(binary);
 
@@ -46,7 +46,7 @@ namespace Assignment_2
 
             // Question 7: Palindrome Number
             Console.WriteLine("Question 7:");
-            int palindromeNumber = 121;
+            int palindromeNumber = 1212;
             bool isPalindrome = IsPalindrome(palindromeNumber);
             Console.WriteLine(isPalindrome);
 
@@ -63,7 +63,15 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return new List<int>(); // Placeholder
+                if (nums.Length == 0) return new List<int>();
+                HashSet<int> numSet = new HashSet<int>(nums);
+                List<int> missing = new List<int>();
+                for (int i = 1; i <= nums.Length; i++)
+                {
+                    if (!numSet.Contains(i)) missing.Add(i);
+                }
+                return missing;
+                // return new List<int>(); // Placeholder
             }
             catch (Exception)
             {
@@ -77,7 +85,16 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return new int[0]; // Placeholder
+                List<int> even = new List<int>();
+                List<int> odd = new List<int>();
+                foreach (int num in nums)
+                {
+                    if (num % 2 == 0) even.Add(num);
+                    else odd.Add(num);
+                }
+                even.AddRange(odd);
+                return even.ToArray();
+                // return new int[0]; // Placeholder
             }
             catch (Exception)
             {
@@ -91,7 +108,16 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return new int[0]; // Placeholder
+                Dictionary<int, int> map = new Dictionary<int, int>();
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    int complement = target - nums[i];
+                    if (map.ContainsKey(complement))
+                        return new int[] { map[complement], i };
+                    map[nums[i]] = i;
+                }
+                return new int[0];
+                // return new int[0]; // Placeholder
             }
             catch (Exception)
             {
@@ -105,7 +131,11 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return 0; // Placeholder
+                if (nums.Length < 3) return 0;
+                Array.Sort(nums);
+                int n = nums.Length;
+                return Math.Max(nums[n - 1] * nums[n - 2] * nums[n - 3], nums[0] * nums[1] * nums[n - 1]);
+                // return 0; // Placeholder
             }
             catch (Exception)
             {
@@ -119,7 +149,8 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return "101010"; // Placeholder
+                return Convert.ToString(decimalNumber, 2);
+                // return "101010"; // Placeholder
             }
             catch (Exception)
             {
@@ -133,7 +164,15 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return 0; // Placeholder
+                int left = 0, right = nums.Length - 1;
+                while (left < right)
+                {
+                    int mid = left + (right - left) / 2;
+                    if (nums[mid] > nums[right]) left = mid + 1;
+                    else right = mid;
+                }
+                return nums[left];
+                // return 0; // Placeholder
             }
             catch (Exception)
             {
@@ -147,7 +186,15 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return false; // Placeholder
+                if (x < 0) return false;
+                int reversed = 0, original = x;
+                while (x > 0)
+                {
+                    reversed = reversed * 10 + x % 10;
+                    x /= 10;
+                }
+                return original == reversed;
+                // return false; // Placeholder
             }
             catch (Exception)
             {
@@ -161,7 +208,16 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return 0; // Placeholder
+                if (n <= 1) return n;
+                int a = 0, b = 1;
+                for (int i = 2; i <= n; i++)
+                {
+                    int temp = a + b;
+                    a = b;
+                    b = temp;
+                }
+                return b;
+                // return 0; // Placeholder
             }
             catch (Exception)
             {
