@@ -62,16 +62,17 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
+                // Use a HashSet to store unique elements of the array
                 if (nums.Length == 0) return new List<int>();
                 HashSet<int> numSet = new HashSet<int>(nums);
                 List<int> missing = new List<int>();
+
+                // Check for numbers from 1 to N that are missing from the HashSet
                 for (int i = 1; i <= nums.Length; i++)
                 {
                     if (!numSet.Contains(i)) missing.Add(i);
                 }
                 return missing;
-                // return new List<int>(); // Placeholder
             }
             catch (Exception)
             {
@@ -84,7 +85,7 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
+                // Separate even and odd numbers
                 List<int> even = new List<int>();
                 List<int> odd = new List<int>();
                 foreach (int num in nums)
@@ -92,9 +93,10 @@ namespace Assignment_2
                     if (num % 2 == 0) even.Add(num);
                     else odd.Add(num);
                 }
+
+                // Append odd numbers to even list
                 even.AddRange(odd);
                 return even.ToArray();
-                // return new int[0]; // Placeholder
             }
             catch (Exception)
             {
@@ -107,17 +109,17 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
+                // Use dictionary to store value and its index
                 Dictionary<int, int> map = new Dictionary<int, int>();
                 for (int i = 0; i < nums.Length; i++)
                 {
                     int complement = target - nums[i];
+                    // If complement exists in dictionary, return the pair of indices
                     if (map.ContainsKey(complement))
                         return new int[] { map[complement], i };
                     map[nums[i]] = i;
                 }
-                return new int[0];
-                // return new int[0]; // Placeholder
+                return new int[0]; // Return empty array if no solution found
             }
             catch (Exception)
             {
@@ -130,12 +132,13 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
+                // Sort array to easily pick the largest and smallest values
                 if (nums.Length < 3) return 0;
                 Array.Sort(nums);
                 int n = nums.Length;
+
+                // Compare product of three largest numbers and two smallest with largest
                 return Math.Max(nums[n - 1] * nums[n - 2] * nums[n - 3], nums[0] * nums[1] * nums[n - 1]);
-                // return 0; // Placeholder
             }
             catch (Exception)
             {
@@ -148,9 +151,8 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
+                // Use built-in Convert method to get binary string
                 return Convert.ToString(decimalNumber, 2);
-                // return "101010"; // Placeholder
             }
             catch (Exception)
             {
@@ -163,16 +165,16 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
+                // Use binary search to find minimum element in rotated sorted array
                 int left = 0, right = nums.Length - 1;
                 while (left < right)
                 {
                     int mid = left + (right - left) / 2;
+                    // If middle element is greater than right, min must be in right half
                     if (nums[mid] > nums[right]) left = mid + 1;
-                    else right = mid;
+                    else right = mid; // Else, min is in left half or at mid
                 }
                 return nums[left];
-                // return 0; // Placeholder
             }
             catch (Exception)
             {
@@ -185,16 +187,18 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
+                // Negative numbers are not palindrome
                 if (x < 0) return false;
+
                 int reversed = 0, original = x;
+                // Reverse the number
                 while (x > 0)
                 {
                     reversed = reversed * 10 + x % 10;
                     x /= 10;
                 }
+                // Compare original with reversed
                 return original == reversed;
-                // return false; // Placeholder
             }
             catch (Exception)
             {
@@ -207,9 +211,11 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
+                // Return n for base cases 0 and 1
                 if (n <= 1) return n;
+
                 int a = 0, b = 1;
+                // Iteratively calculate Fibonacci number
                 for (int i = 2; i <= n; i++)
                 {
                     int temp = a + b;
@@ -217,7 +223,6 @@ namespace Assignment_2
                     b = temp;
                 }
                 return b;
-                // return 0; // Placeholder
             }
             catch (Exception)
             {
